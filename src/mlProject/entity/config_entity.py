@@ -25,3 +25,16 @@ class DataTransformationConfig:
 
     root_dir: Path # root_dir (Path): The root directory where data transformation operations will take place.
     data_path: Path # data_path (Path): The path to the data that will be transformed.
+
+@dataclass(frozen=True)  # Define the class as a dataclass and make it immutable with frozen=True
+class ModelTrainerConfig:
+    """
+    Configuration class for model training. 
+    """
+    root_dir: Path # root_dir (Path): The root directory where model training operations will take place.
+    train_data_path: Path # train_data_path (Path): The path to the training data.
+    test_data_path: Path # test_data_path (Path): The path to the testing data.
+    model_name: str # model_name (str): The name of the model to be trained.
+    alpha: float # alpha (float): The regularization strength parameter for the model.
+    l1_ratio: float # l1_ratio (float): The ElasticNet mixing parameter.
+    target_column: str # target_column (str): The name of the target column in the dataset.
