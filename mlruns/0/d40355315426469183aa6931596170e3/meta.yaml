@@ -1,0 +1,15 @@
+artifact_uri: file:///home/himanshu/github_himanshu/end-to-end-ML-with-MLflow/mlruns/0/d40355315426469183aa6931596170e3/artifacts
+end_time: 1718295500610
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d40355315426469183aa6931596170e3
+run_name: languid-smelt-902
+run_uuid: d40355315426469183aa6931596170e3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1718295497868
+status: 3
+tags: []
+user_id: himanshu
