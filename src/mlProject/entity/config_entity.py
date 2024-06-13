@@ -38,3 +38,20 @@ class ModelTrainerConfig:
     alpha: float # alpha (float): The regularization strength parameter for the model.
     l1_ratio: float # l1_ratio (float): The ElasticNet mixing parameter.
     target_column: str # target_column (str): The name of the target column in the dataset.
+
+
+from dataclasses import dataclass  # Import the dataclass decorator for creating data classes
+from pathlib import Path  # Import the Path class for handling filesystem paths
+
+@dataclass(frozen=True)  # Define the class as a dataclass and make it immutable with frozen=True
+class ModelEvaluationConfig:
+    """
+    Configuration class for model evaluation.
+    """ 
+    root_dir: Path # root_dir (Path): The root directory where model evaluation operations will take place.
+    test_data_path: Path # test_data_path (Path): The path to the testing data.
+    model_path: Path # model_path (Path): The path to the saved model that will be evaluated.
+    all_params: dict # all_params (dict): A dictionary containing parameters for the evaluation.
+    metric_file_name: Path # metric_file_name (Path): The path to the file where evaluation metrics will be saved.
+    target_column: str # target_column (str): The name of the target column in the dataset.
+    mlflow_uri: str # mlflow_uri (str): The URI for MLflow tracking.
