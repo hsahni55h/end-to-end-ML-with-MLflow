@@ -1,0 +1,15 @@
+artifact_uri: file:///home/himanshu/github_himanshu/end-to-end-ML-with-MLflow/mlruns/0/0971d8118d8f41b7b5e2d5d054b4a424/artifacts
+end_time: 1718290464668
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 0971d8118d8f41b7b5e2d5d054b4a424
+run_name: carefree-quail-183
+run_uuid: 0971d8118d8f41b7b5e2d5d054b4a424
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1718290462024
+status: 3
+tags: []
+user_id: himanshu
