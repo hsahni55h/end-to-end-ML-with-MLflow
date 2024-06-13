@@ -17,3 +17,11 @@ class DataValidationConfig:
     STATUS_FILE: str # STATUS_FILE (str): The name of the status file that will store the status of the data validation process.
     unzip_data_dir: Path # unzip_data_dir (Path): The directory where the unzipped data is stored.
     all_schema: dict # all_schema (dict): A dictionary containing all the schema definitions for the data to be validated.
+
+
+@dataclass(frozen=True)  # Define the class as a dataclass and make it immutable with frozen=True
+class DataTransformationConfig:
+    # Configuration class for data transformation.
+
+    root_dir: Path # root_dir (Path): The root directory where data transformation operations will take place.
+    data_path: Path # data_path (Path): The path to the data that will be transformed.
