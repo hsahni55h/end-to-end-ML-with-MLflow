@@ -1,6 +1,7 @@
 from mlProject.constants import *
 from mlProject.utils.common import read_yaml, create_directories
-from mlProject.entity.config_entity import DataIngestionConfig
+from mlProject.entity.config_entity import (DataIngestionConfig,
+                                            DataValidationConfig)
 
 
 
@@ -40,3 +41,26 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+
+
+    def get_data_validation_config(self) -> DataValidationConfig:
+        """
+        Get the DataValidationConfig object from the configuration.
+        
+        Returns:
+            DataValidationConfig: Configuration for data validation.
+        """
+        config = self.config.data_validation  # Get the data validation configuration section
+        schema = self.schema.COLUMNS  # Get the schema columns
+
+        create_directories([config.root_dir])  # Ensure the root directory for data validation exists
+
+        # Create and return a DataValidationConfig object with the configuration details
+        data_validation_config = DataValidationConfig(
+            root_dir=config.root_dir,
+            STATUS_FILE=config.STATUS_FILE,
+            unzip_data_dir=config.unzip_data_dir,
+            all_schema=schema,
+        )
+
+        return data_validation_config
