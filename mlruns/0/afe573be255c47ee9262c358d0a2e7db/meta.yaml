@@ -1,0 +1,15 @@
+artifact_uri: file:///home/himanshu/github_himanshu/end-to-end-ML-with-MLflow/mlruns/0/afe573be255c47ee9262c358d0a2e7db/artifacts
+end_time: 1718290234523
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: afe573be255c47ee9262c358d0a2e7db
+run_name: blushing-finch-899
+run_uuid: afe573be255c47ee9262c358d0a2e7db
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1718290231829
+status: 3
+tags: []
+user_id: himanshu

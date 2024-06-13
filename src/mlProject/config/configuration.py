@@ -3,7 +3,8 @@ from mlProject.utils.common import read_yaml, create_directories
 from mlProject.entity.config_entity import (DataIngestionConfig,
                                             DataValidationConfig,
                                             DataTransformationConfig,
-                                            ModelTrainerConfig)
+                                            ModelTrainerConfig,
+                                            ModelEvaluationConfig)
 
 
 
@@ -113,3 +114,30 @@ class ConfigurationManager:
         )
 
         return model_trainer_config
+
+
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        """
+        Get the ModelEvaluationConfig object from the configuration.
+        
+        Returns:
+            ModelEvaluationConfig: Configuration for model evaluation.
+        """
+        config = self.config.model_evaluation  # Get the model evaluation configuration section
+        params = self.params.ElasticNet  # Get the ElasticNet parameters
+        schema = self.schema.TARGET_COLUMN  # Get the target column from the schema
+
+        create_directories([config.root_dir])  # Ensure the root directory for model evaluation exists
+
+        # Create and return a ModelEvaluationConfig object with the configuration details
+        model_evaluation_config = ModelEvaluationConfig(
+            root_dir=config.root_dir,
+            test_data_path=config.test_data_path,
+            model_path=config.model_path,
+            all_params=params,
+            metric_file_name=config.metric_file_name,
+            target_column=schema.name,
+            mlflow_uri="https://dagshub.com/h.sahni1998/end-to-end-ML-with-MLflow.mlflow",
+        )
+
+        return model_evaluation_config
