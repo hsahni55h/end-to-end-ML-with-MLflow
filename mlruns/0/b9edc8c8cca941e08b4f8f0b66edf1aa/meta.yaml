@@ -1,0 +1,15 @@
+artifact_uri: file:///home/himanshu/github_himanshu/end-to-end-ML-with-MLflow/mlruns/0/b9edc8c8cca941e08b4f8f0b66edf1aa/artifacts
+end_time: 1718290406756
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: b9edc8c8cca941e08b4f8f0b66edf1aa
+run_name: angry-shrew-654
+run_uuid: b9edc8c8cca941e08b4f8f0b66edf1aa
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1718290404152
+status: 3
+tags: []
+user_id: himanshu
