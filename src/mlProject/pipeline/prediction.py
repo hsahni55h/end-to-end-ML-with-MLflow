@@ -1,7 +1,7 @@
-import joblib 
-import numpy as np
-import pandas as pd
 from pathlib import Path
+
+import joblib
+
 
 class PredictionPipeline:
     def __init__(self):
@@ -10,7 +10,7 @@ class PredictionPipeline:
         Loads the trained model from the specified path.
         """
         # Load the model from the specified path using joblib
-        self.model = joblib.load(Path('artifacts/model_trainer/model.joblib'))
+        self.model = joblib.load(Path("artifacts/model_trainer/model.joblib"))
 
     def predict(self, data):
         """

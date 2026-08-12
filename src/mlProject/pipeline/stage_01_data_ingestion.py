@@ -1,10 +1,11 @@
-from mlProject.config.configuration import ConfigurationManager
-from mlProject.components.data_ingestion import DataIngestion
 from mlProject import logger
+from mlProject.components.data_ingestion import DataIngestion
+from mlProject.config.configuration import ConfigurationManager
 
 STAGE_NAME = "Data Ingestion stage"
 
 STAGE_NAME = "Data Ingestion stage"
+
 
 class DataIngestionTrainingPipeline:
     def __init__(self):
@@ -18,8 +19,7 @@ class DataIngestionTrainingPipeline:
         data_ingestion.extract_zip_file()
 
 
-    
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
         obj = DataIngestionTrainingPipeline()
@@ -28,4 +28,3 @@ if __name__ == '__main__':
     except Exception as e:
         logger.exception(e)
         raise e
-

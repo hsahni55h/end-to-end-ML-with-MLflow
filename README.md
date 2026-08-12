@@ -60,21 +60,20 @@ open up you local host and port
 ### dagshub
 [dagshub](https://dagshub.com/)
 
-MLFLOW_TRACKING_URI=https://dagshub.com/h.sahni1998/end-to-end-ML-with-MLflow.mlflow \
-MLFLOW_TRACKING_USERNAME=h.sahni1998 \
-MLFLOW_TRACKING_PASSWORD=REDACTED_DAGSHUB_TOKEN \
-python script.py
-
-Run this to export as env variables:
+Copy `.env.example` to `.env`, fill in your credentials, then run:
 
 ```bash
+# Load env vars and run a script
+set -a && source .env && set +a
+python script.py
+```
 
-export MLFLOW_TRACKING_URI=https://dagshub.com/h.sahni1998/end-to-end-ML-with-MLflow.mlflow 
+Or export manually (values come from your `.env` — never hardcode them here):
 
-export MLFLOW_TRACKING_USERNAME=h.sahni1998 
-
-export MLFLOW_TRACKING_PASSWORD=REDACTED_DAGSHUB_TOKEN
-
+```bash
+export MLFLOW_TRACKING_URI=<your DagsHub mlflow tracking URI>
+export MLFLOW_TRACKING_USERNAME=<your DagsHub username>
+export MLFLOW_TRACKING_PASSWORD=<your DagsHub access token>
 ```
 
 # AWS-CICD-Deployment-with-Github-Actions

@@ -1,12 +1,17 @@
-import os
-import pandas as pd  # Import pandas for data manipulation
-import numpy as np  # Import numpy for numerical operations
+from pathlib import Path  # Import Path class for handling filesystem paths
+from urllib.parse import urlparse  # Import urlparse for parsing URIs
+
 import joblib  # Import joblib for loading the model
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score  # Import metrics for evaluation
 import mlflow  # Import mlflow for tracking and logging
 import mlflow.sklearn
-from urllib.parse import urlparse  # Import urlparse for parsing URIs
-from pathlib import Path  # Import Path class for handling filesystem paths
+import numpy as np  # Import numpy for numerical operations
+import pandas as pd  # Import pandas for data manipulation
+from sklearn.metrics import (  # Import metrics for evaluation
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score,
+)
+
 from mlProject.entity.config_entity import ModelEvaluationConfig
 from mlProject.utils.common import save_json
 
@@ -15,7 +20,7 @@ class ModelEvaluation:
     def __init__(self, config: ModelEvaluationConfig):
         """
         Initialize the ModelEvaluation class with a configuration.
-        
+
         Args:
             config (ModelEvaluationConfig): Configuration for model evaluation.
         """
@@ -24,11 +29,11 @@ class ModelEvaluation:
     def eval_metrics(self, actual, pred):
         """
         Evaluate the model performance using RMSE, MAE, and R2 score.
-        
+
         Args:
             actual (array-like): Actual target values.
             pred (array-like): Predicted target values.
-        
+
         Returns:
             tuple: RMSE, MAE, and R2 score.
         """
@@ -60,7 +65,7 @@ class ModelEvaluation:
 
             # Evaluate the model performance
             (rmse, mae, r2) = self.eval_metrics(test_y, predicted_qualities)
-            
+
             # Save metrics locally as JSON
             scores = {"rmse": rmse, "mae": mae, "r2": r2}
             save_json(path=Path(self.config.metric_file_name), data=scores)
@@ -74,6 +79,8 @@ class ModelEvaluation:
             # Log the model to MLflow
             if tracking_url_type_store != "file":
                 # Register the model if not using file store
-                mlflow.sklearn.log_model(model, "model", registered_model_name="ElasticnetModel")
+                mlflow.sklearn.log_model(
+                    model, "model", registered_model_name="ElasticnetModel"
+                )
             else:
                 mlflow.sklearn.log_model(model, "model")

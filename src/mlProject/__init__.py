@@ -1,6 +1,6 @@
+import logging
 import os
 import sys
-import logging
 
 # Define the format for log messages
 logging_str = "[%(asctime)s: %(levelname)s: %(module)s: %(message)s]"
@@ -18,13 +18,15 @@ logging.basicConfig(
     format=logging_str,  # Use the defined format for log messages
     handlers=[
         logging.FileHandler(log_filepath),  # Log messages to a file
-        logging.StreamHandler(sys.stdout)  # Also output log messages to the console (stdout)
-    ]
+        logging.StreamHandler(
+            sys.stdout
+        ),  # Also output log messages to the console (stdout)
+    ],
 )
 
 # Create a logger object with a specific name
 logger = logging.getLogger("mlProjectLogger")
 
 # Example usage:
-#logger.info("This is an info message")
-#logger.error("This is an error message")
+# logger.info("This is an info message")
+# logger.error("This is an error message")

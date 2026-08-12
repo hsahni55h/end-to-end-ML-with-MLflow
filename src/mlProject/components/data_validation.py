@@ -1,6 +1,6 @@
-import os
-from mlProject import logger
 import pandas as pd
+
+from mlProject import logger
 from mlProject.entity.config_entity import DataValidationConfig
 
 
@@ -8,7 +8,7 @@ class DataValidation:
     def __init__(self, config: DataValidationConfig):
         """
         Initialize the DataValidation class with a configuration.
-        
+
         Args:
             config (DataValidationConfig): Configuration for data validation.
         """
@@ -17,13 +17,13 @@ class DataValidation:
     def validate_all_columns(self) -> bool:
         """
         Validate that all columns in the dataset match the expected schema and their data types are correct.
-        
+
         Returns:
             bool: True if all columns and their data types are valid, False otherwise.
         """
         try:
             validation_status = True  # Initialize validation status
-            
+
             # Read the CSV file from the unzipped data directory
             data = pd.read_csv(self.config.unzip_data_dir)
             all_cols = list(data.columns)  # Get the list of columns in the data
@@ -42,13 +42,15 @@ class DataValidation:
                     actual_dtype = str(data[col].dtype)
                     if actual_dtype != expected_dtype:
                         validation_status = False  # Set validation status to False if data type does not match
-                        logger.error(f"Data type for column {col} does not match. Expected: {expected_dtype}, Found: {actual_dtype}")
+                        logger.error(
+                            f"Data type for column {col} does not match. Expected: {expected_dtype}, Found: {actual_dtype}"
+                        )
 
             # Write the final validation status to the status file
-            with open(self.config.STATUS_FILE, 'w') as f:
+            with open(self.config.STATUS_FILE, "w") as f:
                 f.write(f"Validation status: {validation_status}")
 
             return validation_status  # Return the final validation status
-        
+
         except Exception as e:
             raise e  # Raise the exception if any error occurs

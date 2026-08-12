@@ -1,9 +1,9 @@
+import logging
 import os
 from pathlib import Path
-import logging
 
 # Set up logging configuration to display the time and message for each log entry
-logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
+logging.basicConfig(level=logging.INFO, format="[%(asctime)s]: %(message)s:")
 
 # Define the name of the project
 project_name = "mlProject"
@@ -31,13 +31,17 @@ list_of_files = [
     "setup.py",  # Script for setting up the project as a package
     "research/trials.ipynb",  # Jupyter notebook for research and experimentation
     "templates/index.html",  # HTML template for the web application
-    "test.py"  # Script for running tests
+    "test.py",  # Script for running tests
 ]
 
 # Loop through each file in the list
 for filepath in list_of_files:
-    filepath = Path(filepath)  # Convert the filepath string to a Path object for better manipulation
-    filedir, filename = os.path.split(filepath)  # Split the path into directory and filename components
+    filepath = Path(
+        filepath
+    )  # Convert the filepath string to a Path object for better manipulation
+    filedir, filename = os.path.split(
+        filepath
+    )  # Split the path into directory and filename components
 
     # If the directory part of the path is not empty, create the directory
     if filedir != "":
