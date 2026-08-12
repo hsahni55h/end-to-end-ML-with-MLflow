@@ -1,10 +1,9 @@
-from mlProject.config.configuration import ConfigurationManager
-from mlProject.components.model_trainer import ModelTrainer
 from mlProject import logger
-
-
+from mlProject.components.model_trainer import ModelTrainer
+from mlProject.config.configuration import ConfigurationManager
 
 STAGE_NAME = "Model Trainer stage"
+
 
 class ModelTrainerTrainingPipeline:
     def __init__(self):
@@ -16,7 +15,8 @@ class ModelTrainerTrainingPipeline:
         model_trainer_config = ModelTrainer(config=model_trainer_config)
         model_trainer_config.train()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     try:
         logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
         obj = ModelTrainerTrainingPipeline()

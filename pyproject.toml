@@ -1,0 +1,28 @@
+[tool.ruff]
+line-length = 88
+# Exclude research notebooks (EDA code — not production) from strict linting
+exclude = [
+    "research/",
+    ".git",
+    "__pycache__",
+    ".venv",
+    "venv",
+    "*.egg-info",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = [
+    # black handles line length — E501 is redundant with black
+    "E501",
+    # Wildcard import from constants — existing pattern to be refactored in Phase 1
+    "F403",
+    "F405",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# test helpers and scripts at repo root can be more lenient
+"test.py" = ["E402", "F401"]
+
+[tool.isort]
+profile = "black"
