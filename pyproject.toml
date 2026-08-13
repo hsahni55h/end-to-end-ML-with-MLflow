@@ -1,3 +1,43 @@
+[project]
+name = "production-ml-platform"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "mlflow==2.2.2",
+    # mlflow==2.2.2 imports pkg_resources at runtime; pkg_resources was
+    # removed from setuptools in v81, so pin below that until mlflow is
+    # upgraded (Phase 1 task: "upgrade MLflow tracking calls to the
+    # current API", tracked for a later session — not this one).
+    "setuptools<81",
+    "matplotlib",
+    "python-box==6.0.2",
+    "pyyaml",
+    "tqdm",
+    "ensure==1.0.2",
+    "joblib",
+    "types-pyyaml",
+    "flask",
+    "flask-cors",
+    "notebook",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "black",
+]
+
+# This repo is not distributed as an installable package (no wheel/sdist
+# build needed) — uv should only manage the dependency environment, not
+# try to build/install `mlProject` itself via the legacy setup.py.
+[tool.uv]
+package = false
+
 [tool.ruff]
 line-length = 88
 # Exclude research notebooks (EDA code — not production) from strict linting
