@@ -71,3 +71,60 @@ def test_log_metrics_calls_mlflow_log_params_and_metrics():
 
     mock_mlflow.log_params.assert_called_once_with({"alpha": 0.4, "l1_ratio": 0.3})
     assert mock_mlflow.log_metric.call_count == 2
+
+
+def test_log_metrics_with_no_artifacts_is_a_noop_for_artifact_logging():
+    class FakeEvaluator(Evaluator):
+        def evaluate(self, model, test_data):
+            return {}
+
+    evaluator = FakeEvaluator()
+
+    with patch("core.evaluation.base.mlflow") as mock_mlflow:
+        evaluator.log_metrics({"rmse": 0.5})
+
+    mock_mlflow.log_artifact.assert_not_called()
+    mock_mlflow.log_dict.assert_not_called()
+
+
+def test_log_metrics_logs_path_artifact_via_mlflow_log_artifact(tmp_path):
+    class FakeEvaluator(Evaluator):
+        def evaluate(self, model, test_data):
+            return {}
+
+    sample_image = tmp_path / "sample_prediction.png"
+    sample_image.write_bytes(b"fake-image-bytes")
+    evaluator = FakeEvaluator()
+
+    with patch("core.evaluation.base.mlflow") as mock_mlflow:
+        evaluator.log_metrics({}, artifacts={"sample_prediction": sample_image})
+
+    mock_mlflow.log_artifact.assert_called_once_with(
+        str(sample_image), artifact_path="sample_prediction"
+    )
+
+
+def test_log_metrics_logs_dict_artifact_via_mlflow_log_dict():
+    class FakeEvaluator(Evaluator):
+        def evaluate(self, model, test_data):
+            return {}
+
+    trace = {"question": "what is x?", "answer": "x is y", "faithful": True}
+    evaluator = FakeEvaluator()
+
+    with patch("core.evaluation.base.mlflow") as mock_mlflow:
+        evaluator.log_metrics({}, artifacts={"llm_judge_trace": trace})
+
+    mock_mlflow.log_dict.assert_called_once_with(trace, "llm_judge_trace.json")
+
+
+def test_log_metrics_rejects_unsupported_artifact_type():
+    class FakeEvaluator(Evaluator):
+        def evaluate(self, model, test_data):
+            return {}
+
+    evaluator = FakeEvaluator()
+
+    with patch("core.evaluation.base.mlflow"):
+        with pytest.raises(TypeError):
+            evaluator.log_metrics({}, artifacts={"weird": object()})
