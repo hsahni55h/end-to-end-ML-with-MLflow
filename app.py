@@ -1,5 +1,6 @@
-import os  # Import os for operating system functionalities
+from pathlib import Path  # Import Path for filesystem paths
 
+import joblib  # Import joblib to load the trained model
 import numpy as np  # Import numpy for numerical operations
 from flask import (  # Import Flask for creating the web app
     Flask,
@@ -7,11 +8,26 @@ from flask import (  # Import Flask for creating the web app
     request,
 )
 
-from mlProject.pipeline.prediction import (  # Import the PredictionPipeline class
-    PredictionPipeline,
-)
-
 app = Flask(__name__)  # Initialize a Flask app
+
+
+class PredictionPipeline:
+    """Loads the trained wine_quality model and serves predictions.
+
+    Inlined here (rather than imported from the retired legacy
+    `src/mlProject` package) since this is the only piece of that package
+    `app.py` still needed. `app.py` itself remains as the reference
+    implementation for the FastAPI migration in S1.3.
+    """
+
+    def __init__(self):
+        # Load the model from the specified path using joblib
+        self.model = joblib.load(Path("artifacts/model_trainer/model.joblib"))
+
+    def predict(self, data):
+        # Make predictions using the loaded model
+        prediction = self.model.predict(data)
+        return prediction
 
 
 @app.route("/", methods=["GET"])  # Route to display the home page
@@ -21,8 +37,18 @@ def homePage():
 
 @app.route("/train", methods=["GET"])  # Route to train the pipeline
 def training():
-    os.system("python main.py")  # Run the training script
-    return "Training Successful!"  # Return a success message
+    # main.py (the legacy src/mlProject training entrypoint) was retired in
+    # S1.2. The new training entrypoint is
+    # `uv run python -m projects.01_wine_quality.pipeline`, but it saves its
+    # model under projects/01_wine_quality/artifacts/, not the root
+    # artifacts/ directory `/predict` below reads from — wiring this route
+    # to it directly would silently retrain a model `/predict` never sees.
+    # Left as a stub pending the S1.3 FastAPI migration, which replaces
+    # this training/serving split entirely.
+    return (
+        "Training via this route is retired. Run "
+        "`uv run python -m projects.01_wine_quality.pipeline` directly instead."
+    )
 
 
 @app.route(

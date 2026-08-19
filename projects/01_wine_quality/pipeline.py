@@ -37,9 +37,10 @@ def _load_yaml(path: Path) -> dict:
 
 def run_pipeline() -> Dict[str, float]:
     """Run the full wine_quality pipeline once and return the test metrics."""
-    config = _load_yaml(PROJECT_ROOT / "config.yaml")
-    params = _load_yaml(PROJECT_ROOT / "params.yaml")
-    schema = _load_yaml(PROJECT_ROOT / "schema.yaml")
+    config_dir = PROJECT_ROOT / "config"
+    config = _load_yaml(config_dir / "config.yaml")
+    params = _load_yaml(config_dir / "params.yaml")
+    schema = _load_yaml(config_dir / "schema.yaml")
 
     target_column = schema["TARGET_COLUMN"]["name"]
 
