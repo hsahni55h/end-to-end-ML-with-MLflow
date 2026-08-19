@@ -19,10 +19,11 @@ dependencies = [
     "ensure==1.0.2",
     "joblib",
     "types-pyyaml",
-    "flask",
-    "flask-cors",
     "notebook",
     "optuna>=4.9.0",
+    "fastapi>=0.141.1",
+    "uvicorn[standard]>=0.52.4",
+    "httpx>=0.28.1",
 ]
 
 [dependency-groups]
@@ -31,6 +32,7 @@ dev = [
     "pytest-cov",
     "ruff",
     "black",
+    "dvc>=3.67.1",
 ]
 
 # This repo is not distributed as an installable package (no wheel/sdist
