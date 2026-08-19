@@ -1,0 +1,12 @@
+# Hyperparameter-tuning + split configuration for the wine_quality ElasticNet
+# pipeline. `optuna.n_trials` trades tuning quality for run time — 20 trials
+# over a 2D search space (alpha, l1_ratio) is enough to beat the untuned
+# defaults (alpha=0.4, l1_ratio=0.3) used by the legacy src/mlProject pipeline
+# without making a full pipeline run slow.
+train_test_split:
+  test_size: 0.25
+  random_state: 42
+
+optuna:
+  n_trials: 20
+  val_size: 0.2
