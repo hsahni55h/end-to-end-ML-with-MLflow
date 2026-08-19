@@ -1,0 +1,5 @@
+outs:
+- md5: 98e14459f9fb131cd9f83ecad4328d5d
+  size: 23329
+  hash: md5
+  path: winequality-data.zip
